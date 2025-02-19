@@ -7,6 +7,7 @@ import {z} from 'zod';
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useLogin} from "@/hooks/use-login.tsx";
 import {useNavigate} from "@tanstack/react-router";
+import {useIsAuthenticated} from "@/hooks/use-is-authenticated.tsx";
 
 const formSchema = z.object({
     username: z.string(),
@@ -18,6 +19,8 @@ const formSchema = z.object({
 
 export const LoginScreen = () => {
     const navigate = useNavigate()
+    const {isAuthenticated} = useIsAuthenticated()
+
     const {mutateAsync: login} = useLogin({
         onSuccess: async () => {
             await navigate({
@@ -36,6 +39,12 @@ export const LoginScreen = () => {
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         return login({username: values.username, password: values.password})
+    }
+
+    if (isAuthenticated) {
+        navigate({
+            to: '/'
+        })
     }
 
     return (

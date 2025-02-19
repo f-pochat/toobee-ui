@@ -10,3 +10,9 @@ export type Chat = {
     last_message_date: string;
     last_message: string;
 }
+
+export type UserInfo = {
+    id: string;
+    name: string;
+    email: string;
+}

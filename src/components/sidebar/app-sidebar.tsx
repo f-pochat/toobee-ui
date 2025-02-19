@@ -13,6 +13,7 @@ import {Dialog, DialogTrigger} from "@/components/ui/dialog.tsx";
 import {ConfigureChatbot} from "@/components/sidebar/configure-chatbot.tsx";
 import {useGetChats} from "@/hooks/use-get-chats.tsx";
 import {Skeleton} from "@/components/ui/skeleton.tsx";
+import {LogoutFooter} from "@/components/sidebar/logout-footer.tsx";
 
 export const AppSidebar = () => {
     const chatbot_id = localStorage.getItem("chatbot_id");
@@ -60,6 +61,7 @@ export const AppSidebar = () => {
                         }
                     </SidebarGroup>
                 </SidebarContent>
+                <LogoutFooter />
                 <SidebarRail/>
             </Sidebar>
             <ConfigureChatbot/>
