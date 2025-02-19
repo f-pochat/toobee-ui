@@ -11,8 +11,7 @@ type Options = {
     onSuccess?: (data: Chat[]) => void;
 }
 
-export const useGetChats = (chatbot_id: string = "338c51dc-8a82-4108-b32c-b2beb639905a", options?: Options) => {
-    const user_id = cookies.get("user_id")
+export const useGetChats = (chatbot_id: string = "338c51dc-8a82-4108-b32c-b2beb639905", options?: Options) => {
     const query = useQuery<Chat[], Error, Chat[]>({
         queryFn: () => getChats(chatbot_id),
         queryKey: ['chatbots'],
