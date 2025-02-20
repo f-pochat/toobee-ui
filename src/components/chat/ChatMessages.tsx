@@ -24,7 +24,6 @@ export const ChatMessages = ({ chatId }: { chatId: string }) => {
 
     const handleToggle = () => {
         if (!chat) return;
-        console.log("FEDE", chat.ai_response)
         // Optimistically update UI
         queryClient.setQueryData(["chat-messages", chatId], (oldData: any) => ({
             ...oldData,
