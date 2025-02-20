@@ -33,7 +33,6 @@ export const ChatbotSwitcher = () => {
         <SidebarMenu>
             <SidebarMenuItem>
                 <DropdownMenu>
-
                     <DropdownMenuTrigger asChild>
                         <SidebarMenuButton
                             size="lg"

@@ -1,7 +1,6 @@
 import {useGetChat} from "@/hooks/use-get-chat.tsx";
 import {useEffect, useRef} from "react";
-import {ChatSkeleton} from "@/components/chat/ChatSkeleton.tsx";
-import {Label} from "@radix-ui/react-dropdown-menu";
+import {ChatSkeleton} from "@/components/chat/chat-skeleton.tsx";
 import {Switch} from "@/components/ui/switch.tsx";
 import {Avatar} from "@/components/ui/avatar.tsx";
 import {Bot, User, UserCog} from "lucide-react";
@@ -9,6 +8,7 @@ import {Input} from "@/components/ui/input.tsx";
 import {Button} from "@/components/ui/button.tsx";
 import {useSetIsAiAnswered} from "@/hooks/use-set-ai-answer.tsx";
 import {useQueryClient} from "@tanstack/react-query";
+import {Label} from "@/components/ui/label.tsx";
 
 export const ChatMessages = ({ chatId }: { chatId: string }) => {
     const { data: chat, isLoading } = useGetChat(chatId);
@@ -21,6 +21,7 @@ export const ChatMessages = ({ chatId }: { chatId: string }) => {
         // @ts-ignore
         chatEndRef.current?.scrollIntoView();
     }, [chat]);
+
 
     const handleToggle = () => {
         if (!chat) return;
@@ -46,7 +47,7 @@ export const ChatMessages = ({ chatId }: { chatId: string }) => {
 
 
     return (
-        <div className="flex flex-col h-screen">
+        <div className="flex flex-col h-full">
             {isLoading ? (
                 <ChatSkeleton />
             ) : (
@@ -54,7 +55,6 @@ export const ChatMessages = ({ chatId }: { chatId: string }) => {
                     <div className="flex items-center justify-between px-4 py-4 border-b">
                         <h1 className="text-lg font-semibold">Chat Room</h1>
                         <div className="flex items-center px-2 gap-2">
-                            {/*@ts-ignore*/}
                             <Label htmlFor="ai">AI Responses</Label>
                             <Switch
                                 id="ai"
