@@ -13,7 +13,6 @@ export const DataSourceScreen = () => {
                     dropZoneClassName="h-[100px]"
                     onDrop={() => {
                         // Do something with the files
-                        console.log("BOCA")
                     }}
                 />
                 <div className="flex gap-2 flex-wrap">

@@ -1,6 +1,10 @@
 export type Chatbot = {
     id: string;
     name: string;
+    system_message?: string;
+    phone_number_id?: string;
+    whatsapp_client_id?: string;
+    whatsapp_client_secret?: string;
 }
 
 export type Chat = {

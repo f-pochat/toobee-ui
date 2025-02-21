@@ -6,7 +6,7 @@ import {
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu.tsx";
 import {Bot, ChevronsUpDown} from "lucide-react";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useGetChatbots} from "@/hooks/use-get-chatbots.tsx";
 import {Chatbot} from "@/types.ts";
 import {Skeleton} from "@/components/ui/skeleton.tsx";
@@ -14,11 +14,15 @@ import {Skeleton} from "@/components/ui/skeleton.tsx";
 export const ChatbotSwitcher = () => {
     const [activeChatbot, setActiveChatbot] = useState<Chatbot | null>(null);
     const active_chatbot_id = localStorage.getItem("active_chatbot_id");
-    const {data: chatbots, isLoading} = useGetChatbots({
-        onSuccess: (data: Chatbot[]) => {
-            setActiveChatbot(data.find(c => c.id === active_chatbot_id) ?? data[0])
+    const {data: chatbots, isLoading} = useGetChatbots();
+
+    useEffect(() => {
+        if (chatbots) {
+            setActiveChatbot(chatbots.find(c => c.id === active_chatbot_id) ?? chatbots[0])
+            if (!active_chatbot_id) localStorage.setItem("active_chatbot_id", chatbots[0].id);
         }
-    });
+    }, [active_chatbot_id, chatbots]);
+
     const {isMobile} = useSidebar();
 
     if (isLoading || !chatbots) {
@@ -62,7 +66,10 @@ export const ChatbotSwitcher = () => {
                         {chatbots.map((chatbot) => (
                             <DropdownMenuItem
                                 key={chatbot.name}
-                                onClick={() => setActiveChatbot(chatbot)}
+                                onClick={() => {
+                                    setActiveChatbot(chatbot)
+                                    localStorage.setItem("active_chatbot_id", chatbot.id)
+                                }}
                                 className="gap-2 p-2"
                             >
                                 {chatbot.name}

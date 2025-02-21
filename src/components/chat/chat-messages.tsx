@@ -1,19 +1,23 @@
 import {useGetChat} from "@/hooks/use-get-chat.tsx";
-import {useEffect, useRef} from "react";
+import {useEffect, useRef, useState} from "react";
 import {ChatSkeleton} from "@/components/chat/chat-skeleton.tsx";
 import {Switch} from "@/components/ui/switch.tsx";
 import {Avatar} from "@/components/ui/avatar.tsx";
-import {Bot, User, UserCog} from "lucide-react";
+import {Bot, RefreshCw, User, UserCog} from "lucide-react";
 import {Input} from "@/components/ui/input.tsx";
 import {Button} from "@/components/ui/button.tsx";
 import {useSetIsAiAnswered} from "@/hooks/use-set-ai-answer.tsx";
 import {useQueryClient} from "@tanstack/react-query";
 import {Label} from "@/components/ui/label.tsx";
+import {useSendMessage} from "@/hooks/use-send-message.tsx";
+import {ChatWithMessages} from "@/types.ts";
 
 export const ChatMessages = ({ chatId }: { chatId: string }) => {
     const { data: chat, isLoading } = useGetChat(chatId);
+    const {mutateAsync: sendMessage, isPending} = useSendMessage()
     const queryClient = useQueryClient();
     const chatEndRef = useRef(null);
+    const [value, setValue] = useState<string>("")
 
     const setIsAiAnswered = useSetIsAiAnswered();
 
@@ -26,7 +30,7 @@ export const ChatMessages = ({ chatId }: { chatId: string }) => {
     const handleToggle = () => {
         if (!chat) return;
         // Optimistically update UI
-        queryClient.setQueryData(["chat-messages", chatId], (oldData: any) => ({
+        queryClient.setQueryData(["chat-messages", chatId], (oldData: ChatWithMessages) => ({
             ...oldData,
             ai_response: !chat.ai_response, // Update state optimistically
         }));
@@ -36,7 +40,7 @@ export const ChatMessages = ({ chatId }: { chatId: string }) => {
             {
                 onError: () => {
                     // Rollback to previous state on failure
-                    queryClient.setQueryData(["chat-messages", chatId], (oldData: any) => ({
+                    queryClient.setQueryData(["chat-messages", chatId], (oldData: ChatWithMessages) => ({
                         ...oldData,
                         ai_response: chat.ai_response, // Revert to previous state
                     }));
@@ -45,6 +49,36 @@ export const ChatMessages = ({ chatId }: { chatId: string }) => {
         );
     };
 
+    console.log(value)
+
+    const sendChatMessage = async() => {
+        if (!chat) return;
+        const message = value;
+        setValue("");
+        // Optimistically update UI
+        queryClient.setQueryData(["chat-messages", chatId], (oldData: ChatWithMessages) => ({
+            ...oldData,
+            messages: [...oldData.messages, {
+                id: "id",
+                content: message,
+                role: "manual",
+                created_at: new Date()
+            }]
+        }));
+
+        await sendMessage(
+            { chat_id: chatId, message: value ?? "" },
+            {
+                onError: () => {
+                    // Rollback to previous state on failure
+                    queryClient.setQueryData(["chat-messages", chatId], (oldData: ChatWithMessages) => ({
+                        ...oldData,
+                        messages: oldData.messages.splice(-1)
+                    }));
+                },
+            }
+        );
+    }
 
     return (
         <div className="flex flex-col h-full w-full">
@@ -53,7 +87,10 @@ export const ChatMessages = ({ chatId }: { chatId: string }) => {
             ) : (
                 <>
                     <div className="flex items-center justify-between px-4 py-4 border-b">
-                        <h1 className="text-lg font-semibold">Chat Room</h1>
+                        <Button variant="outline" onClick={() => queryClient.invalidateQueries({queryKey: ["chat-messages", chatId]})}>
+                            <RefreshCw />
+                        </Button>
+                        <h1 className="text-lg font-semibold">{chat?.name}</h1>
                         <div className="flex items-center px-2 gap-2">
                             <Label htmlFor="ai">AI Responses</Label>
                             <Switch
@@ -99,8 +136,8 @@ export const ChatMessages = ({ chatId }: { chatId: string }) => {
                         <div ref={chatEndRef} />
                     </div>
                     <div className="flex items-center space-x-2 p-8 bg-secondary">
-                        <Input className="flex-1 bg-white" placeholder="Type a message" />
-                        <Button disabled={true}>Send</Button>
+                        <Input className="flex-1 bg-white" placeholder="Type a message" value={value ?? ""} onChange={(e) => setValue(e.target.value)} />
+                        <Button disabled={isPending || !value} onClick={sendChatMessage}>Send</Button>
                     </div>
                 </>
             )}

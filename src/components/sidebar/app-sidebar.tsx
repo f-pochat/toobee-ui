@@ -35,7 +35,6 @@ const items = [
 
 export const AppSidebar = () => {
     const {pathname} = useLocation();
-    console.log(pathname)
     return (
         <Sidebar collapsible="icon">
             <SidebarHeader>
