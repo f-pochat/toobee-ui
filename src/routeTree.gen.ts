@@ -14,6 +14,10 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as LoginImport } from './routes/login'
 import { Route as AppImport } from './routes/_app'
 import { Route as AppIndexImport } from './routes/_app/index'
+import { Route as AppPromptingImport } from './routes/_app/prompting'
+import { Route as AppDataSourcesImport } from './routes/_app/data-sources'
+import { Route as AppConfigurationImport } from './routes/_app/configuration'
+import { Route as AppChatsImport } from './routes/_app/chats'
 
 // Create/Update Routes
 
@@ -31,6 +35,30 @@ const AppRoute = AppImport.update({
 const AppIndexRoute = AppIndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => AppRoute,
+} as any)
+
+const AppPromptingRoute = AppPromptingImport.update({
+  id: '/prompting',
+  path: '/prompting',
+  getParentRoute: () => AppRoute,
+} as any)
+
+const AppDataSourcesRoute = AppDataSourcesImport.update({
+  id: '/data-sources',
+  path: '/data-sources',
+  getParentRoute: () => AppRoute,
+} as any)
+
+const AppConfigurationRoute = AppConfigurationImport.update({
+  id: '/configuration',
+  path: '/configuration',
+  getParentRoute: () => AppRoute,
+} as any)
+
+const AppChatsRoute = AppChatsImport.update({
+  id: '/chats',
+  path: '/chats',
   getParentRoute: () => AppRoute,
 } as any)
 
@@ -52,6 +80,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginImport
       parentRoute: typeof rootRoute
     }
+    '/_app/chats': {
+      id: '/_app/chats'
+      path: '/chats'
+      fullPath: '/chats'
+      preLoaderRoute: typeof AppChatsImport
+      parentRoute: typeof AppImport
+    }
+    '/_app/configuration': {
+      id: '/_app/configuration'
+      path: '/configuration'
+      fullPath: '/configuration'
+      preLoaderRoute: typeof AppConfigurationImport
+      parentRoute: typeof AppImport
+    }
+    '/_app/data-sources': {
+      id: '/_app/data-sources'
+      path: '/data-sources'
+      fullPath: '/data-sources'
+      preLoaderRoute: typeof AppDataSourcesImport
+      parentRoute: typeof AppImport
+    }
+    '/_app/prompting': {
+      id: '/_app/prompting'
+      path: '/prompting'
+      fullPath: '/prompting'
+      preLoaderRoute: typeof AppPromptingImport
+      parentRoute: typeof AppImport
+    }
     '/_app/': {
       id: '/_app/'
       path: '/'
@@ -65,10 +121,18 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 interface AppRouteChildren {
+  AppChatsRoute: typeof AppChatsRoute
+  AppConfigurationRoute: typeof AppConfigurationRoute
+  AppDataSourcesRoute: typeof AppDataSourcesRoute
+  AppPromptingRoute: typeof AppPromptingRoute
   AppIndexRoute: typeof AppIndexRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppChatsRoute: AppChatsRoute,
+  AppConfigurationRoute: AppConfigurationRoute,
+  AppDataSourcesRoute: AppDataSourcesRoute,
+  AppPromptingRoute: AppPromptingRoute,
   AppIndexRoute: AppIndexRoute,
 }
 
@@ -77,11 +141,19 @@ const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 export interface FileRoutesByFullPath {
   '': typeof AppRouteWithChildren
   '/login': typeof LoginRoute
+  '/chats': typeof AppChatsRoute
+  '/configuration': typeof AppConfigurationRoute
+  '/data-sources': typeof AppDataSourcesRoute
+  '/prompting': typeof AppPromptingRoute
   '/': typeof AppIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/login': typeof LoginRoute
+  '/chats': typeof AppChatsRoute
+  '/configuration': typeof AppConfigurationRoute
+  '/data-sources': typeof AppDataSourcesRoute
+  '/prompting': typeof AppPromptingRoute
   '/': typeof AppIndexRoute
 }
 
@@ -89,15 +161,40 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/_app': typeof AppRouteWithChildren
   '/login': typeof LoginRoute
+  '/_app/chats': typeof AppChatsRoute
+  '/_app/configuration': typeof AppConfigurationRoute
+  '/_app/data-sources': typeof AppDataSourcesRoute
+  '/_app/prompting': typeof AppPromptingRoute
   '/_app/': typeof AppIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '' | '/login' | '/'
+  fullPaths:
+    | ''
+    | '/login'
+    | '/chats'
+    | '/configuration'
+    | '/data-sources'
+    | '/prompting'
+    | '/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/login' | '/'
-  id: '__root__' | '/_app' | '/login' | '/_app/'
+  to:
+    | '/login'
+    | '/chats'
+    | '/configuration'
+    | '/data-sources'
+    | '/prompting'
+    | '/'
+  id:
+    | '__root__'
+    | '/_app'
+    | '/login'
+    | '/_app/chats'
+    | '/_app/configuration'
+    | '/_app/data-sources'
+    | '/_app/prompting'
+    | '/_app/'
   fileRoutesById: FileRoutesById
 }
 
@@ -128,11 +225,31 @@ export const routeTree = rootRoute
     "/_app": {
       "filePath": "_app.tsx",
       "children": [
+        "/_app/chats",
+        "/_app/configuration",
+        "/_app/data-sources",
+        "/_app/prompting",
         "/_app/"
       ]
     },
     "/login": {
       "filePath": "login.tsx"
+    },
+    "/_app/chats": {
+      "filePath": "_app/chats.tsx",
+      "parent": "/_app"
+    },
+    "/_app/configuration": {
+      "filePath": "_app/configuration.tsx",
+      "parent": "/_app"
+    },
+    "/_app/data-sources": {
+      "filePath": "_app/data-sources.tsx",
+      "parent": "/_app"
+    },
+    "/_app/prompting": {
+      "filePath": "_app/prompting.tsx",
+      "parent": "/_app"
     },
     "/_app/": {
       "filePath": "_app/index.tsx",

@@ -8,50 +8,53 @@ import {
 import {Folders, Inbox, Settings, Terminal} from "lucide-react";
 import {ChatbotSwitcher} from "@/components/sidebar/chatbot-switcher.tsx";
 import {LogoutFooter} from "@/components/sidebar/logout-footer.tsx";
+import {Link, useLocation} from "@tanstack/react-router";
 
 const items = [
     {
         title: "Chats",
-        url: "#",
+        url: "/chats",
         icon: Inbox,
     },
     {
         title: "Data Sources",
-        url: "#",
+        url: "/data-sources",
         icon: Folders,
     },
     {
-      title: "Prompting",
-      url: "#",
-      icon: Terminal,
+        title: "Prompting",
+        url: "/prompting",
+        icon: Terminal,
     },
     {
         title: "Configuration",
-        url: "#",
+        url: "/configuration",
         icon: Settings,
     }
 ]
 
 export const AppSidebar = () => {
+    const {pathname} = useLocation();
+    console.log(pathname)
     return (
         <Sidebar collapsible="icon">
             <SidebarHeader>
                 <div className="flex justify-between items-center gap-1">
                     <ChatbotSwitcher/>
-                    <SidebarTrigger />
+                    <SidebarTrigger/>
                 </div>
             </SidebarHeader>
             <SidebarContent>
                 <SidebarGroup>
                     <SidebarGroupContent>
-                        <SidebarMenu>
+                        <SidebarMenu className="flex flex-col gap-2">
                             {items.map((item) => (
                                 <SidebarMenuItem key={item.title}>
-                                    <SidebarMenuButton asChild>
-                                        <a href={item.url}>
-                                            <item.icon />
+                                    <SidebarMenuButton asChild isActive={pathname === item.url}>
+                                        <Link to={item.url}>
+                                            <item.icon/>
                                             <span>{item.title}</span>
-                                        </a>
+                                        </Link>
                                     </SidebarMenuButton>
                                 </SidebarMenuItem>
                             ))}
@@ -60,9 +63,9 @@ export const AppSidebar = () => {
                 </SidebarGroup>
             </SidebarContent>
             <SidebarFooter>
-                <LogoutFooter />
+                <LogoutFooter/>
             </SidebarFooter>
-            <SidebarRail className="focus:outline-0 hover:outline-0 hover:border-0 border-0" />
+            <SidebarRail className="focus:outline-0 hover:outline-0 hover:border-0 border-0"/>
         </Sidebar>
     )
 }

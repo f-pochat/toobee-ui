@@ -1,5 +1,4 @@
 import {createFileRoute, Outlet} from '@tanstack/react-router'
-import {ChatSidebar} from "@/components/sidebar/chat-sidebar.tsx";
 import {SidebarInset, SidebarProvider} from "@/components/ui/sidebar.tsx";
 import ProtectedLayout from "@/lib/protected-layout.tsx";
 import {AppSidebar} from "@/components/sidebar/app-sidebar.tsx";
@@ -15,9 +14,7 @@ function App() {
                 <SidebarProvider>
                     <AppSidebar/>
                     <SidebarInset>
-                        <ChatSidebar>
-                            <Outlet/>
-                        </ChatSidebar>
+                        <Outlet/>
                     </SidebarInset>
                 </SidebarProvider>
             </ProtectedLayout>

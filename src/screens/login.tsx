@@ -24,7 +24,7 @@ export const LoginScreen = () => {
     const {mutateAsync: login} = useLogin({
         onSuccess: async () => {
             await navigate({
-                to: '/'
+                to: '/chats'
             })
         }
     });
@@ -43,7 +43,7 @@ export const LoginScreen = () => {
 
     if (isAuthenticated) {
         navigate({
-            to: '/'
+            to: '/chats'
         })
     }
 

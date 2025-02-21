@@ -1,5 +1,4 @@
-import {createFileRoute} from '@tanstack/react-router'
-import {HomeScreen} from "@/screens/home.tsx";
+import {createFileRoute, Navigate} from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_app/')({
     component: index,
@@ -7,6 +6,6 @@ export const Route = createFileRoute('/_app/')({
 
 function index() {
     return (
-        <HomeScreen/>
+       <Navigate to="/chats"/>
     )
 }
