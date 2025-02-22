@@ -24,7 +24,9 @@ export const LoginScreen = () => {
     const {t} = useTranslation();
 
     const {mutateAsync: login} = useLogin({
-        onSuccess: async () => {
+        onSuccess: async (d) => {
+            localStorage.setItem("access_token", d.access);
+            localStorage.setItem("refresh_token", d.refresh);
             await navigate({
                 to: '/chats'
             })
@@ -92,6 +94,7 @@ export const LoginScreen = () => {
                                             <FormControl>
                                                 <Input
                                                     id="password"
+                                                    type="password"
                                                     placeholder="******"
                                                     autoComplete="current-password"
                                                     {...field}

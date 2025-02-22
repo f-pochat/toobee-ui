@@ -1,18 +1,8 @@
-import { useMutation } from "@tanstack/react-query";
-import * as superagent from "superagent";
-import {API_URL} from "@/constants.ts";
-
-type Options = {
-    onSuccess?: () => void;
-};
-
-export const useLogout = (options?: Options) => {
-    return useMutation<void, Error>({
-        mutationFn: logout,
-        onSuccess: options?.onSuccess,
-    });
-};
-
-const logout = async (): Promise<void> => {
-    await superagent.post(`${API_URL}/logout`).withCredentials();
+export const useLogout = () => {
+    const logout = () => {
+        localStorage.removeItem("active_chatbot_id");
+        localStorage.removeItem("access_token");
+        localStorage.removeItem("refresh_token");
+    };
+    return {logout}
 };

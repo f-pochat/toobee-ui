@@ -1,9 +1,9 @@
 import {useQuery} from "@tanstack/react-query";
-import * as superagent from "superagent";
 import {Chatbot} from "@/types.ts";
 
 import Cookies from "universal-cookie";
 import {API_URL} from "@/constants.ts";
+import {request} from "@/request.ts";
 
 const cookies = new Cookies();
 
@@ -17,10 +17,6 @@ export const useGetChatbots = () => {
 }
 
 const getChatbots = async (): Promise<Chatbot[]> => {
-    const res = await superagent.get(`${API_URL}/configuration/chatbots`)
-        .withCredentials()
-        .set({
-        "X-CSRFToken": cookies.get("csrftoken")
-    });
+    const res = await request.get(`${API_URL}/configuration/chatbots`)
     return res.body
 }

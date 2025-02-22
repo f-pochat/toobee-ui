@@ -1,12 +1,9 @@
 import {useQuery} from "@tanstack/react-query";
-import * as superagent from "superagent";
 import {Chat} from "@/types.ts";
 
-import Cookies from "universal-cookie";
 import {useEffect} from "react";
 import {API_URL} from "@/constants.ts";
-
-const cookies = new Cookies();
+import {request} from "@/request.ts";
 
 type Options = {
     onSuccess?: (data: Chat[]) => void;
@@ -29,10 +26,6 @@ export const useGetChats = (chatbot_id: string = "338c51dc-8a82-4108-b32c-b2beb6
 }
 
 const getChats = async (chatbot_id: string): Promise<Chat[]> => {
-    const res = await superagent.get(`${API_URL}/configuration/chats/${chatbot_id}`)
-        .withCredentials()
-        .set({
-        "X-CSRFToken": cookies.get("csrftoken")
-    });
+    const res = await request.get(`${API_URL}/configuration/chats/${chatbot_id}`)
     return res.body
 }

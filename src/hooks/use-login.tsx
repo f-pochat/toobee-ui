@@ -1,9 +1,9 @@
 import {useMutation} from "@tanstack/react-query";
-import * as superagent from "superagent";
 import {API_URL} from "@/constants.ts";
+import {request} from "@/request.ts";
 
 type Options = {
-    onSuccess?: () => void;
+    onSuccess?: (d: LoginResponse) => void;
 }
 
 type LoginParams = {
@@ -11,16 +11,19 @@ type LoginParams = {
     password: string;
 }
 
+type LoginResponse = {
+    access: string;
+    refresh: string;
+}
+
 export const useLogin = (options?: Options) => {
-    return useMutation<object, Error, LoginParams>({
+    return useMutation<LoginResponse, Error, LoginParams>({
         mutationFn: login,
-        onSuccess: options?.onSuccess
+        ...options
     })
 }
 
-const login = async (loginParams: LoginParams): Promise<object> => {
-    const res = await superagent.post(`${API_URL}/login`)
-        .withCredentials()
-        .send(loginParams);
+const login = async (loginParams: LoginParams): Promise<LoginResponse> => {
+    const res = await request.post(`${API_URL}/api/token/`, loginParams)
     return res.body
 }

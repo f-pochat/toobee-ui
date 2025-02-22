@@ -12,16 +12,13 @@ export const LogoutFooter = () => {
 
     const {data: userInfo} = useUserInfo();
 
-    const {mutateAsync: logout} = useLogout({
-        onSuccess: async () => {
-            await navigate({
-                to: '/login'
-            })
-        }
-    });
+    const {logout} = useLogout();
 
     const handleLogout = async () => {
-        await logout()
+        logout()
+        await navigate({
+            to: '/login'
+        })
     }
 
     return (

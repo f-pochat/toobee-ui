@@ -1,9 +1,6 @@
 import {MutationOptions, useMutation} from "@tanstack/react-query";
-import superagent from "superagent";
-import Cookies from "universal-cookie";
 import {API_URL} from "@/constants.ts";
-
-const cookies = new Cookies();
+import {request} from "@/request.ts";
 
 interface UpdateChatbotParams {
     name?: string;
@@ -22,14 +19,11 @@ export const useUpdateChatbot = (options?: MutationOptions<UpdateChatbotParams, 
 
 const updateChatbot = async ({ name, system_message, whatsapp_client_id, whatsapp_client_secret, phone_number_id }: UpdateChatbotParams): Promise<object> => {
     const id = localStorage.getItem("active_chatbot_id");
-    const res = await superagent
-        .put(`${API_URL}/configuration/chatbot/${id}`)
-        .withCredentials()
-        .set({
-            "X-CSRFToken": cookies.get("csrftoken")
-        }).send({
-            name, system_message, whatsapp_client_id, whatsapp_client_secret, phone_number_id
-        });
+    const res = await request
+        .put(`${API_URL}/configuration/chatbot/${id}`
+            , {
+                name, system_message, whatsapp_client_id, whatsapp_client_secret, phone_number_id
+            })
 
     return res.body;
 };

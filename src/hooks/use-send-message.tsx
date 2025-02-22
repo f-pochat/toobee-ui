@@ -1,9 +1,7 @@
 import {MutationOptions, useMutation} from "@tanstack/react-query";
-import superagent from "superagent";
-import Cookies from "universal-cookie";
 import {API_URL} from "@/constants.ts";
+import {request} from "@/request.ts";
 
-const cookies = new Cookies();
 
 interface SendMessageParams {
     chat_id: string;
@@ -18,14 +16,10 @@ export const useSendMessage = (options?: MutationOptions<object, Error, SendMess
 };
 
 const setIsAiAnswered = async ({ chat_id, message }: SendMessageParams): Promise<object> => {
-    const res = await superagent
-        .post(`${API_URL}/configuration/send/${chat_id}`)
-        .withCredentials()
-        .set({
-            "X-CSRFToken": cookies.get("csrftoken")
-        }).send({
+    const res = await request
+        .post(`${API_URL}/configuration/send/${chat_id}`, {
             message
-        });
+        })
 
     return res.body;
 };
