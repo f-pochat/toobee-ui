@@ -1,5 +1,6 @@
 import {useMutation} from "@tanstack/react-query";
 import * as superagent from "superagent";
+import {API_URL} from "@/constants.ts";
 
 type Options = {
     onSuccess?: () => void;
@@ -18,7 +19,7 @@ export const useLogin = (options?: Options) => {
 }
 
 const login = async (loginParams: LoginParams): Promise<object> => {
-    const res = await superagent.post('http://localhost:8000/login')
+    const res = await superagent.post(`${API_URL}/login`)
         .withCredentials()
         .send(loginParams);
     return res.body

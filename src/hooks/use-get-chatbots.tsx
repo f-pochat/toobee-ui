@@ -3,6 +3,7 @@ import * as superagent from "superagent";
 import {Chatbot} from "@/types.ts";
 
 import Cookies from "universal-cookie";
+import {API_URL} from "@/constants.ts";
 
 const cookies = new Cookies();
 
@@ -16,7 +17,7 @@ export const useGetChatbots = () => {
 }
 
 const getChatbots = async (): Promise<Chatbot[]> => {
-    const res = await superagent.get('http://localhost:8000/configuration/chatbots')
+    const res = await superagent.get(`${API_URL}/configuration/chatbots`)
         .withCredentials()
         .set({
         "X-CSRFToken": cookies.get("csrftoken")

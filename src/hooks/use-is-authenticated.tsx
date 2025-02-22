@@ -1,12 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import * as superagent from "superagent";
+import {API_URL} from "@/constants.ts";
 
 export const useIsAuthenticated = () => {
     const { data: isAuthenticated, isLoading } = useQuery<boolean, Error>({
         queryKey: ["isAuthenticated"],
         queryFn: async () => {
             try {
-                await superagent.get("http://localhost:8000/user-info").withCredentials();
+                await superagent.get(`${API_URL}/user-info`).withCredentials();
                 return true;
             } catch {
                 return false;

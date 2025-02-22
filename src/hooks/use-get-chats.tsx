@@ -4,6 +4,7 @@ import {Chat} from "@/types.ts";
 
 import Cookies from "universal-cookie";
 import {useEffect} from "react";
+import {API_URL} from "@/constants.ts";
 
 const cookies = new Cookies();
 
@@ -28,7 +29,7 @@ export const useGetChats = (chatbot_id: string = "338c51dc-8a82-4108-b32c-b2beb6
 }
 
 const getChats = async (chatbot_id: string): Promise<Chat[]> => {
-    const res = await superagent.get(`http://localhost:8000/configuration/chats/${chatbot_id}`)
+    const res = await superagent.get(`${API_URL}/configuration/chats/${chatbot_id}`)
         .withCredentials()
         .set({
         "X-CSRFToken": cookies.get("csrftoken")

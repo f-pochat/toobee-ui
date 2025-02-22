@@ -1,5 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import * as superagent from "superagent";
+import {API_URL} from "@/constants.ts";
 
 type Options = {
     onSuccess?: () => void;
@@ -13,5 +14,5 @@ export const useLogout = (options?: Options) => {
 };
 
 const logout = async (): Promise<void> => {
-    await superagent.post("http://localhost:8000/logout").withCredentials();
+    await superagent.post(`${API_URL}/logout`).withCredentials();
 };

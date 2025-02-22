@@ -1,6 +1,7 @@
 import {MutationOptions, useMutation} from "@tanstack/react-query";
 import superagent from "superagent";
 import Cookies from "universal-cookie";
+import {API_URL} from "@/constants.ts";
 
 const cookies = new Cookies();
 
@@ -18,7 +19,7 @@ export const useSubmitURL = (options?: MutationOptions<object, Error, SubmitURLP
 const submitURL = async ({ url }: SubmitURLParams): Promise<object> => {
     const id = localStorage.getItem("active_chatbot_id")
     const res = await superagent
-        .post(`http://localhost:8000/configuration/submit_url`)
+        .post(`${API_URL}/configuration/submit_url`)
         .withCredentials()
         .set({
             "X-CSRFToken": cookies.get("csrftoken")

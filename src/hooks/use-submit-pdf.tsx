@@ -1,6 +1,7 @@
 import {MutationOptions, useMutation} from "@tanstack/react-query";
 import superagent, {MultipartValueSingle} from "superagent";
 import Cookies from "universal-cookie";
+import {API_URL} from "@/constants.ts";
 
 const cookies = new Cookies();
 
@@ -18,7 +19,7 @@ export const useSubmitPDF = (options?: MutationOptions<object, Error, SubmitPDFP
 const submitPDF = async ({ pdf }: SubmitPDFParams): Promise<object> => {
     const id = localStorage.getItem("active_chatbot_id")
     const res = await superagent
-        .post(`http://localhost:8000/configuration/submit_pdf/${id}`)
+        .post(`${API_URL}/configuration/submit_pdf/${id}`)
         .withCredentials()
         .set({
             "X-CSRFToken": cookies.get("csrftoken")
