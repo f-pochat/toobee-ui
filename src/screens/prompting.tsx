@@ -20,7 +20,9 @@ export const PromptingScreen = () => {
         <div className="flex flex-col p-10 gap-3">
             <div className="flex flex-row justify-between items-center">
                 <h1>{t("sections.prompting")}</h1>
-                <Button onClick={async () => await updateChatbot({system_message: value})} disabled={isPending || isLoading}>
+                <Button
+                    onClick={async () => await updateChatbot({system_message: value})}
+                    disabled={isPending || isLoading || value == data?.system_message}>
                     {t("common.save-changes")}
                 </Button>
             </div>

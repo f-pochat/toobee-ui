@@ -32,7 +32,9 @@ export const ConfigurationScreen = () => {
         <div className="flex flex-col p-10 gap-3">
             <div className="flex flex-row justify-between items-center">
                 <h1>{t("sections.configuration")}</h1>
-                <Button onClick={async () => await updateChatbot(credentials)} disabled={isPending || isLoading}>
+                <Button
+                    onClick={async () => await updateChatbot(credentials)}
+                    disabled={isPending || isLoading || Object.keys(credentials).every((k) => chatbot?.[k as keyof Chatbot] === credentials?.[k as keyof Chatbot])}>
                     {t("common.save-changes")}
                 </Button>
             </div>

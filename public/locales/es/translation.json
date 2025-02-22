@@ -14,7 +14,10 @@
   },
   "data-sources": {
     "pdf": "Fuentes de Documentos",
-    "upload": "Subir archivos"
+    "upload": "Subir archivos",
+    "delete-warning": "Esta acción no se puede deshacer. ¿Estás seguro de que deseas eliminar permanentemente este archivo de tus fuentes de datos?",
+    "urls": "Fuentes de Sitios Web",
+    "add-url": "Agregar Sitio Web"
   },
   "prompting": {
     "system-message": "Mensaje del Sistema"
@@ -33,6 +36,8 @@
     "password": "Contraseña"
   },
   "common": {
-    "save-changes": "Guardar Cambios"
+    "save-changes": "Guardar Cambios",
+    "are-you-sure": "¿Estás seguro?",
+    "confirm": "Confirmar"
   }
 }
