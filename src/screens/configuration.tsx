@@ -8,10 +8,12 @@ import {Chatbot} from "@/types.ts";
 import {useGetChatbot} from "@/hooks/use-get-chatbot.tsx";
 import {useQueryClient} from "@tanstack/react-query";
 import Cookies from "universal-cookie";
+import {useTranslation} from "react-i18next";
 
 const cookies = new Cookies();
 
 export const ConfigurationScreen = () => {
+    const {t} = useTranslation();
     const {data: chatbot, isLoading} = useGetChatbot();
     const user_id = cookies.get("user_id");
     const queryClient = useQueryClient();
@@ -29,24 +31,24 @@ export const ConfigurationScreen = () => {
     return (
         <div className="flex flex-col p-10 gap-3">
             <div className="flex flex-row justify-between items-center">
-                <h1>Configuration</h1>
+                <h1>{t("sections.configuration")}</h1>
                 <Button onClick={async () => await updateChatbot(credentials)} disabled={isPending || isLoading}>
-                    Save Changes
+                    {t("common.save-changes")}
                 </Button>
             </div>
             <div className="flex flex-col gap-2">
                 <Label htmlFor="name">
-                    Chatbot Name
+                    {t("configuration.name")}
                 </Label>
                 <Input id="name" value={credentials.name}
                        onChange={(e) => setCredentials({...credentials, name: e.target.value})} className="col-span-3"
                 />
             </div>
             <Separator/>
-            <h2>Credentials</h2>
+            <h2>{t("configuration.credentials")}</h2>
             <div className="grid grid-cols-4 items-center gap-4">
                 <Label htmlFor="whatsapp-phone-id" className="text-right">
-                    Phone Number ID
+                    {t("configuration.phone-number-id")}
                 </Label>
                 <Input id="whatsapp-phone-id"
                        className="col-span-3" value={credentials.phone_number_id}
@@ -54,14 +56,14 @@ export const ConfigurationScreen = () => {
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
                 <Label htmlFor="whatsapp-client-id" className="text-right">
-                    Whatsapp Client ID
+                    {t("configuration.whatsapp-client-id")}
                 </Label>
                 <Input id="whatsapp-client-id" className="col-span-3" value={credentials.whatsapp_client_id}
                        onChange={(e) => setCredentials({...credentials, whatsapp_client_id: e.target.value})}/>
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
                 <Label htmlFor="whatsapp-client-secret" className="text-right">
-                    Whatsapp Client Secret
+                    {t("configuration.whatsapp-client-secret")}
                 </Label>
                 <Input id="whatsapp-client-secret" type="password" className="col-span-3"
                        value={credentials.whatsapp_client_secret}

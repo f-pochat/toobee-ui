@@ -2,6 +2,7 @@ import {useGetChats} from "@/hooks/use-get-chats.tsx";
 import {Skeleton} from "@/components/ui/skeleton.tsx";
 import {Input} from "@/components/ui/input.tsx";
 import {ReactNode} from "react";
+import {useTranslation} from "react-i18next";
 
 const parseDate = (date: string): string => {
     const now = new Date();
@@ -27,6 +28,7 @@ const parseDate = (date: string): string => {
 };
 
 export const ChatSidebar = ({children}: { children: ReactNode }) => {
+    const {t} = useTranslation();
     const {chatId: selectedChatId} = {chatId: "some"}
 
     const chatbot_id = localStorage.getItem("active_chatbot_id");
@@ -35,7 +37,7 @@ export const ChatSidebar = ({children}: { children: ReactNode }) => {
         <div className="flex flex-row h-screen">
             <div className="w-[24rem] pt-2 px-2">
                 <div className="flex flex-col gap-2">
-                    <Input placeholder="Type to search..."/>
+                    <Input placeholder={t("chats.search")}/>
                     {
                         isLoading || !chats ?
                             <Skeleton/>

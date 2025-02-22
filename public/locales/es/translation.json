@@ -1,0 +1,38 @@
+{
+  "sections": {
+    "chats": "Mensajes",
+    "data-sources": "Fuentes de Datos",
+    "prompting": "Generación de Prompts",
+    "configuration": "Configuración"
+  },
+  "chats": {
+    "fallback": "Ningún chat seleccionado. Por favor, selecciona un chat para empezar a enviar mensajes.",
+    "search": "Escribe para buscar...",
+    "ai": "Respuestas de IA",
+    "type-message": "Escribe un mensaje",
+    "send": "Enviar"
+  },
+  "data-sources": {
+    "pdf": "Fuentes de Documentos",
+    "upload": "Subir archivos"
+  },
+  "prompting": {
+    "system-message": "Mensaje del Sistema"
+  },
+  "configuration": {
+    "name": "Nombre del Chatbot",
+    "credentials": "Credenciales",
+    "phone-number-id": "ID del Número de Teléfono",
+    "whatsapp-client-id": "ID del Cliente de WhatsApp",
+    "whatsapp-client-secret": "Secreto del Cliente de WhatsApp"
+  },
+  "auth": {
+    "login": "Iniciar Sesión",
+    "message": "Ingresa tu correo electrónico y contraseña para acceder a tu cuenta.",
+    "username": "Usuario",
+    "password": "Contraseña"
+  },
+  "common": {
+    "save-changes": "Guardar Cambios"
+  }
+}

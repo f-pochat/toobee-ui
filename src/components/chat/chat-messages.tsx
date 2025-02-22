@@ -11,8 +11,10 @@ import {useQueryClient} from "@tanstack/react-query";
 import {Label} from "@/components/ui/label.tsx";
 import {useSendMessage} from "@/hooks/use-send-message.tsx";
 import {ChatWithMessages} from "@/types.ts";
+import {useTranslation} from "react-i18next";
 
 export const ChatMessages = ({ chatId }: { chatId: string }) => {
+    const {t} = useTranslation();
     const { data: chat, isLoading } = useGetChat(chatId);
     const {mutateAsync: sendMessage, isPending} = useSendMessage()
     const queryClient = useQueryClient();
@@ -48,8 +50,6 @@ export const ChatMessages = ({ chatId }: { chatId: string }) => {
             }
         );
     };
-
-    console.log(value)
 
     const sendChatMessage = async() => {
         if (!chat) return;
@@ -92,7 +92,7 @@ export const ChatMessages = ({ chatId }: { chatId: string }) => {
                         </Button>
                         <h1 className="text-lg font-semibold">{chat?.name}</h1>
                         <div className="flex items-center px-2 gap-2">
-                            <Label htmlFor="ai">AI Responses</Label>
+                            <Label htmlFor="ai">{t("chats.ai")}</Label>
                             <Switch
                                 id="ai"
                                 checked={chat?.ai_response}
@@ -136,8 +136,8 @@ export const ChatMessages = ({ chatId }: { chatId: string }) => {
                         <div ref={chatEndRef} />
                     </div>
                     <div className="flex items-center space-x-2 p-8 bg-secondary">
-                        <Input className="flex-1 bg-white" placeholder="Type a message" value={value ?? ""} onChange={(e) => setValue(e.target.value)} />
-                        <Button disabled={isPending || !value} onClick={sendChatMessage}>Send</Button>
+                        <Input className="flex-1 bg-white" placeholder={t("chats.type-message")} value={value ?? ""} onChange={(e) => setValue(e.target.value)} />
+                        <Button disabled={isPending || !value} onClick={sendChatMessage}>{t("chats.send")}</Button>
                     </div>
                 </>
             )}

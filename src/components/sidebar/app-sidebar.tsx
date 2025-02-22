@@ -9,31 +9,34 @@ import {Folders, Inbox, Settings, Terminal} from "lucide-react";
 import {ChatbotSwitcher} from "@/components/sidebar/chatbot-switcher.tsx";
 import {LogoutFooter} from "@/components/sidebar/logout-footer.tsx";
 import {Link, useLocation} from "@tanstack/react-router";
-
-const items = [
-    {
-        title: "Chats",
-        url: "/chats",
-        icon: Inbox,
-    },
-    {
-        title: "Data Sources",
-        url: "/data-sources",
-        icon: Folders,
-    },
-    {
-        title: "Prompting",
-        url: "/prompting",
-        icon: Terminal,
-    },
-    {
-        title: "Configuration",
-        url: "/configuration",
-        icon: Settings,
-    }
-]
+import {useTranslation} from "react-i18next";
 
 export const AppSidebar = () => {
+    const {t} = useTranslation();
+
+    const items = [
+        {
+            title: t("sections.chats"),
+            url: "/chats",
+            icon: Inbox,
+        },
+        {
+            title: t("sections.data-sources"),
+            url: "/data-sources",
+            icon: Folders,
+        },
+        {
+            title: t("sections.prompting"),
+            url: "/prompting",
+            icon: Terminal,
+        },
+        {
+            title: t("sections.configuration"),
+            url: "/configuration",
+            icon: Settings,
+        }
+    ]
+
     const {pathname} = useLocation();
     return (
         <Sidebar collapsible="icon">

@@ -35,3 +35,10 @@ type ChatMessage = {
     role: "customer" | "assistant" | "manual"
     created_at: Date;
 }
+
+export type DataSource = {
+    id: string;
+    name: string;
+    status: string;
+    type: string;
+}

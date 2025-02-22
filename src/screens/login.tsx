@@ -8,6 +8,7 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {useLogin} from "@/hooks/use-login.tsx";
 import {useNavigate} from "@tanstack/react-router";
 import {useIsAuthenticated} from "@/hooks/use-is-authenticated.tsx";
+import {useTranslation} from "react-i18next";
 
 const formSchema = z.object({
     username: z.string(),
@@ -18,8 +19,9 @@ const formSchema = z.object({
 })
 
 export const LoginScreen = () => {
-    const navigate = useNavigate()
-    const {isAuthenticated} = useIsAuthenticated()
+    const navigate = useNavigate();
+    const {isAuthenticated} = useIsAuthenticated();
+    const {t} = useTranslation();
 
     const {mutateAsync: login} = useLogin({
         onSuccess: async () => {
@@ -51,9 +53,9 @@ export const LoginScreen = () => {
         <div className="flex flex-col min-h-[50vh] h-full w-full items-center justify-center px-4">
             <Card className="mx-auto max-w-sm">
                 <CardHeader>
-                    <CardTitle className="text-2xl">Login</CardTitle>
+                    <CardTitle className="text-2xl">{t("auth.login")}</CardTitle>
                     <CardDescription>
-                        Enter your email and password to login to your account.
+                        {t("auth.message")}
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -66,7 +68,7 @@ export const LoginScreen = () => {
                                     render={({field}) => (
                                         <FormItem className="grid">
                                             <div className="flex items-center">
-                                                <FormLabel htmlFor="username">Username</FormLabel>
+                                                <FormLabel htmlFor="username">{t("auth.username")}</FormLabel>
                                             </div>
                                             <FormControl>
                                                 <Input
@@ -85,7 +87,7 @@ export const LoginScreen = () => {
                                     render={({field}) => (
                                         <FormItem className="grid">
                                             <div className="flex justify-between items-center">
-                                                <FormLabel htmlFor="password">Password</FormLabel>
+                                                <FormLabel htmlFor="password">{t("auth.password")}</FormLabel>
                                             </div>
                                             <FormControl>
                                                 <Input
@@ -100,7 +102,7 @@ export const LoginScreen = () => {
                                     )}
                                 />
                                 <Button type="submit" className="w-full">
-                                    Login
+                                    {t("auth.login")}
                                 </Button>
                             </div>
                         </form>
