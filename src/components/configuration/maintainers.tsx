@@ -8,6 +8,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { Trash } from "lucide-react";
 import { useDeleteMaintainer } from "@/hooks/use-delete-maintainer.tsx";
 import { useTranslation } from "react-i18next";
+import {toast} from "react-toastify";
 
 export const Maintainers = () => {
     const { t } = useTranslation();
@@ -17,14 +18,14 @@ export const Maintainers = () => {
     const [username, setUsername] = useState("");
 
     const queryClient = useQueryClient();
-    const { mutateAsync: addMaintainer, isPending: addMaintainerIsLoading } = useAddMaintainer({
+    const { mutateAsync: addMaintainer } = useAddMaintainer({
         onSettled: async () => {
             await queryClient.invalidateQueries({ queryKey: ['maintainers', chatbotId] });
             setSearchQuery("");
             setUsername("");
         },
         onError: () => {
-            alert(t('maintainers.username_not_found'));
+            toast.error(t('maintainers.username_not_found'));
         }
     });
 
@@ -33,7 +34,7 @@ export const Maintainers = () => {
             await queryClient.invalidateQueries({ queryKey: ['maintainers', localStorage.getItem("active_chatbot_id")] });
         },
         onError: () => {
-            alert(t('maintainers.failed_to_delete'));
+            toast.error(t('maintainers.failed_to_delete'));
         }
     });
 
@@ -73,7 +74,7 @@ export const Maintainers = () => {
                     />
                     <Button
                         onClick={handleInviteClick}
-                        disabled={addMaintainerIsLoading || !username}
+                        disabled={false}
                     >
                         {t('maintainers.invite_button')}
                     </Button>
