@@ -13,7 +13,7 @@ import {toast} from "react-toastify";
 export const Maintainers = () => {
     const { t } = useTranslation();
     const chatbotId = localStorage.getItem("active_chatbot_id") || undefined;
-    const { data: maintainers } = useGetMaintainers(chatbotId);
+    const { data: maintainers, isPending: addMaintainerIsPending  } = useGetMaintainers(chatbotId);
     const [searchQuery, setSearchQuery] = useState("");
     const [username, setUsername] = useState("");
 
@@ -74,7 +74,7 @@ export const Maintainers = () => {
                     />
                     <Button
                         onClick={handleInviteClick}
-                        disabled={false}
+                        disabled={addMaintainerIsPending || !username}
                     >
                         {t('maintainers.invite_button')}
                     </Button>
