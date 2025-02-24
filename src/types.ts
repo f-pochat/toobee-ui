@@ -42,3 +42,10 @@ export type DataSource = {
     status: string;
     type: string;
 }
+
+export type Maintainer = {
+    id: string,
+    username: string;
+    email: string;
+    role: string;
+}

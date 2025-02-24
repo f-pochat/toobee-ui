@@ -27,7 +27,15 @@
     "credentials": "Credenciales",
     "phone-number-id": "ID del Número de Teléfono",
     "whatsapp-client-id": "ID del Cliente de WhatsApp",
-    "whatsapp-client-secret": "Secreto del Cliente de WhatsApp"
+    "whatsapp-client-secret": "Secreto del Cliente de WhatsApp",
+    "maintainers-title": "Colaboradores"
+  },
+  "maintainers": {
+    "search_placeholder": "Buscar por nombre de usuario...",
+    "username_placeholder": "Ingresar nombre de usuario",
+    "invite_button": "Invitar",
+    "username_not_found": "Nombre de usuario no encontrado",
+    "failed_to_delete": "Error al eliminar al colaborador"
   },
   "auth": {
     "login": "Iniciar Sesión",

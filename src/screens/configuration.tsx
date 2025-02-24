@@ -9,6 +9,7 @@ import {useGetChatbot} from "@/hooks/use-get-chatbot.tsx";
 import {useQueryClient} from "@tanstack/react-query";
 import Cookies from "universal-cookie";
 import {useTranslation} from "react-i18next";
+import {Maintainers} from "@/components/configuration/maintainers.tsx";
 
 const cookies = new Cookies();
 
@@ -71,6 +72,9 @@ export const ConfigurationScreen = () => {
                        value={credentials.whatsapp_client_secret}
                        onChange={(e) => setCredentials({...credentials, whatsapp_client_secret: e.target.value})}/>
             </div>
+            <Separator/>
+            <h2>{t("configuration.maintainers-title")}</h2>
+            <Maintainers />
         </div>
     )
 }
