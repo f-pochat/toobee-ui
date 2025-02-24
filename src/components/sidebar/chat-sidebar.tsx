@@ -1,8 +1,8 @@
 import {useGetChats} from "@/hooks/use-get-chats.tsx";
-import {Skeleton} from "@/components/ui/skeleton.tsx";
 import {Input} from "@/components/ui/input.tsx";
 import {ReactNode} from "react";
 import {useTranslation} from "react-i18next";
+import {ChatSidebarSkeleton} from "@/components/sidebar/chat-sidebar-skeleton.tsx";
 
 const parseDate = (date: string): string => {
     const now = new Date();
@@ -40,7 +40,7 @@ export const ChatSidebar = ({children}: { children: ReactNode }) => {
                     <Input placeholder={t("chats.search")}/>
                     {
                         isLoading || !chats ?
-                            <Skeleton/>
+                            <ChatSidebarSkeleton/>
                             :
                             <div>
                                 {chats.map((chat) => (
