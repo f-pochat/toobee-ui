@@ -7,8 +7,8 @@ import { request } from "@/request.ts";
 
 export const useGetTiendanubeConfiguration = (chatbotId?: string) => {
     return useQuery<TiendanubeConfiguration, Error, TiendanubeConfiguration>({
-        queryFn: () => getTiendanubeConfiguration(chatbotId),  // The function that fetches the maintainers
-        queryKey: ['tiendanube-configuration', chatbotId]  // Unique key for cache
+        queryFn: () => getTiendanubeConfiguration(chatbotId),
+        queryKey: ['tiendanube-configuration', chatbotId]
     });
 }
 
