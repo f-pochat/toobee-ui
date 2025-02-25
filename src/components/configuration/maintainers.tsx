@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {useMemo, useState} from "react";
 import { Avatar } from "@radix-ui/react-avatar";
 import { useGetMaintainers } from "@/hooks/use-get-maintainers.tsx";
 import { Button } from "@/components/ui/button.tsx";
@@ -9,11 +9,13 @@ import { Trash } from "lucide-react";
 import { useDeleteMaintainer } from "@/hooks/use-delete-maintainer.tsx";
 import { useTranslation } from "react-i18next";
 import {toast} from "react-toastify";
+import {useUserInfo} from "@/hooks/use-user-info.tsx";
 
 export const Maintainers = () => {
     const { t } = useTranslation();
     const chatbotId = localStorage.getItem("active_chatbot_id") || undefined;
     const { data: maintainers, isPending: addMaintainerIsPending  } = useGetMaintainers(chatbotId);
+    const { data: userInfo } = useUserInfo();
     const [searchQuery, setSearchQuery] = useState("");
     const [username, setUsername] = useState("");
 
@@ -54,6 +56,10 @@ export const Maintainers = () => {
     const handleDeleteClick = async (userId: string) => {
         await deleteMaintainer({ userId, chatbotId: localStorage.getItem('active_chatbot_id') || '' });
     };
+
+    const isOwner = useMemo(() => {
+        return maintainers?.find((maintainer) => maintainer.role === 'owner')?.id === userInfo?.id;
+    }, [userInfo]);
 
     return (
         <div className="space-y-4">
@@ -97,7 +103,7 @@ export const Maintainers = () => {
                         <td className="py-2 px-4 text-sm text-gray-700">{userInfo.role}</td>
                         <td className="py-2 px-4 text-sm">
                             {
-                                userInfo.role === 'maintainer' && (
+                                (userInfo.role === 'maintainer' && isOwner) && (
                                     <Button variant="outline" size="icon" onClick={() => handleDeleteClick(userInfo.id)}>
                                         <Trash className="w-4 h-4" color="grey" />
                                     </Button>

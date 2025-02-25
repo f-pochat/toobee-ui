@@ -1,7 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
-import superagent from "superagent";
 import {API_URL} from "@/constants.ts";
-
+import {request} from "@/request.ts";
 
 interface SetIsAiAnsweredParams {
     chatId: string;
@@ -15,7 +14,7 @@ export const useSetIsAiAnswered = () => {
 };
 
 const setIsAiAnswered = async ({ chatId, isAiAnswered }: SetIsAiAnsweredParams): Promise<object> => {
-    const res = await superagent
+    const res = await request
         .post(`${API_URL}/configuration/set_ai_answered/${chatId}/${isAiAnswered}`)
 
     return res.body;
