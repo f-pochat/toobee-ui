@@ -19,6 +19,13 @@
     "urls": "Fuentes de Sitios Web",
     "add-url": "Agregar Sitio Web"
   },
+  "tiendanube": {
+    "code": "Inserte el codigo de Tiendanube...",
+    "connected": "CONECTADO",
+    "disconnected": "DESCONECTADO",
+    "save": "Guardar",
+    "error": "Error al guardar la configuración de Tiendanube"
+  },
   "prompting": {
     "system-message": "Mensaje del Sistema"
   },

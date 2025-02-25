@@ -49,3 +49,7 @@ export type Maintainer = {
     email: string;
     role: string;
 }
+
+export type TiendanubeConfiguration = {
+    status: "CONNECTED" | "DISCONNECTED";
+}
