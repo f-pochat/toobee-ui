@@ -60,14 +60,12 @@ export const TiendanubeConfiguration = () => {
             </div>
 
             {tiendanubeConfig?.status === "CONNECTED" ? (
-                // <div className="flex flex-row gap-2">
-                    <Button
-                        onClick={handleDisconnect}
-                        disabled={disconnectIsPending}
-                    >
-                        {t("tiendanube.disconnect")}
-                    </Button>
-                // </div>
+                <Button
+                    onClick={handleDisconnect}
+                    disabled={disconnectIsPending}
+                >
+                    {t("tiendanube.disconnect")}
+                </Button>
             ) : (
                 <div className="flex justify-between gap-2">
                     <Input
