@@ -20,11 +20,13 @@
     "add-url": "Agregar Sitio Web"
   },
   "tiendanube": {
-    "code": "Inserte el codigo de Tiendanube...",
+    "code": "Ingrese el codigo de Tiendanube...",
     "connected": "CONECTADO",
     "disconnected": "DESCONECTADO",
-    "save": "Guardar",
-    "error": "Error al guardar la configuración de Tiendanube"
+    "save": "Conectar",
+    "connect-error": "Error al conectar con Tiendanube",
+    "disconnect-error": "Error al desconectar Tiendanube",
+    "disconnect": "Desconectar"
   },
   "prompting": {
     "system-message": "Mensaje del Sistema"
