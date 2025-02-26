@@ -19,6 +19,15 @@
     "urls": "Fuentes de Sitios Web",
     "add-url": "Agregar Sitio Web"
   },
+  "tiendanube": {
+    "code": "Ingrese el codigo de Tiendanube...",
+    "connected": "CONECTADO",
+    "disconnected": "DESCONECTADO",
+    "save": "Conectar",
+    "connect-error": "Error al conectar con Tiendanube",
+    "disconnect-error": "Error al desconectar Tiendanube",
+    "disconnect": "Desconectar"
+  },
   "prompting": {
     "system-message": "Mensaje del Sistema"
   },

@@ -18,6 +18,8 @@ import {useTranslation} from "react-i18next";
 import {Input} from "@/components/ui/input.tsx";
 import {useSubmitURL} from "@/hooks/use-submit-url.tsx";
 import {useEffect, useState} from "react";
+import {TiendanubeConfiguration} from "@/components/data-sources/tiendanube-configuration.tsx";
+import {Separator} from "@/components/ui/separator.tsx";
 
 export const DataSourceScreen = () => {
     const {t} = useTranslation();
@@ -124,6 +126,7 @@ export const DataSourceScreen = () => {
                         </div>
                     </div>
                 </div>
+                <Separator/>
                 <div>
                     <h2 className="p-2">
                         {t("data-sources.urls")}
@@ -158,6 +161,9 @@ export const DataSourceScreen = () => {
                         <Button onClick={() => setUrls([...urls, ""])}>{t("data-sources.add-url")}</Button>
                     </div>
                 </div>
+                <Separator/>
+                <TiendanubeConfiguration />
+                <Separator/>
             </div>
             <DialogContent>
                 <DialogHeader>
