@@ -12,6 +12,7 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as LoginImport } from './routes/login'
+import { Route as InitChatbotImport } from './routes/init-chatbot'
 import { Route as AppImport } from './routes/_app'
 import { Route as AppIndexImport } from './routes/_app/index'
 import { Route as AppPromptingImport } from './routes/_app/prompting'
@@ -24,6 +25,12 @@ import { Route as AppChatsImport } from './routes/_app/chats'
 const LoginRoute = LoginImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const InitChatbotRoute = InitChatbotImport.update({
+  id: '/init-chatbot',
+  path: '/init-chatbot',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -71,6 +78,13 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: ''
       preLoaderRoute: typeof AppImport
+      parentRoute: typeof rootRoute
+    }
+    '/init-chatbot': {
+      id: '/init-chatbot'
+      path: '/init-chatbot'
+      fullPath: '/init-chatbot'
+      preLoaderRoute: typeof InitChatbotImport
       parentRoute: typeof rootRoute
     }
     '/login': {
@@ -140,6 +154,7 @@ const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 
 export interface FileRoutesByFullPath {
   '': typeof AppRouteWithChildren
+  '/init-chatbot': typeof InitChatbotRoute
   '/login': typeof LoginRoute
   '/chats': typeof AppChatsRoute
   '/configuration': typeof AppConfigurationRoute
@@ -149,6 +164,7 @@ export interface FileRoutesByFullPath {
 }
 
 export interface FileRoutesByTo {
+  '/init-chatbot': typeof InitChatbotRoute
   '/login': typeof LoginRoute
   '/chats': typeof AppChatsRoute
   '/configuration': typeof AppConfigurationRoute
@@ -160,6 +176,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/_app': typeof AppRouteWithChildren
+  '/init-chatbot': typeof InitChatbotRoute
   '/login': typeof LoginRoute
   '/_app/chats': typeof AppChatsRoute
   '/_app/configuration': typeof AppConfigurationRoute
@@ -172,6 +189,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | ''
+    | '/init-chatbot'
     | '/login'
     | '/chats'
     | '/configuration'
@@ -180,6 +198,7 @@ export interface FileRouteTypes {
     | '/'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/init-chatbot'
     | '/login'
     | '/chats'
     | '/configuration'
@@ -189,6 +208,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/_app'
+    | '/init-chatbot'
     | '/login'
     | '/_app/chats'
     | '/_app/configuration'
@@ -200,11 +220,13 @@ export interface FileRouteTypes {
 
 export interface RootRouteChildren {
   AppRoute: typeof AppRouteWithChildren
+  InitChatbotRoute: typeof InitChatbotRoute
   LoginRoute: typeof LoginRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   AppRoute: AppRouteWithChildren,
+  InitChatbotRoute: InitChatbotRoute,
   LoginRoute: LoginRoute,
 }
 
@@ -219,6 +241,7 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/_app",
+        "/init-chatbot",
         "/login"
       ]
     },
@@ -231,6 +254,9 @@ export const routeTree = rootRoute
         "/_app/prompting",
         "/_app/"
       ]
+    },
+    "/init-chatbot": {
+      "filePath": "init-chatbot.tsx"
     },
     "/login": {
       "filePath": "login.tsx"

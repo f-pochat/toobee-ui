@@ -5,6 +5,10 @@ import {AppSidebar} from "@/components/sidebar/app-sidebar.tsx";
 import {initReactI18next} from "react-i18next";
 import i18n from "i18next";
 import Backend from "i18next-http-backend";
+import {ToastContainer} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import {ChatbotGuard} from "@/guards/ChatbotGuard.tsx";
+
 
 export const Route = createFileRoute('/_app')({
     component: App,
@@ -28,13 +32,16 @@ function App() {
     return (
         <>
             <ProtectedLayout>
-                <SidebarProvider>
-                    <AppSidebar/>
-                    <SidebarInset>
-                        <Outlet/>
-                    </SidebarInset>
-                </SidebarProvider>
+                <ChatbotGuard>
+                    <SidebarProvider>
+                        <AppSidebar/>
+                            <SidebarInset>
+                                <Outlet/>
+                            </SidebarInset>
+                    </SidebarProvider>
+                </ChatbotGuard>
             </ProtectedLayout>
+            <ToastContainer />
         </>
     )
 }
