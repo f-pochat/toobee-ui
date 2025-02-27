@@ -77,12 +77,34 @@ export default {
   				to: {
   					height: '0'
   				}
-  			}
+  			},
+			typewriter: {
+				'0%': { width: '0ch' },
+				'100%': { width: '19ch' },
+			},
+			blinkCaret: {
+				'0%, 100%': { borderColor: 'transparent' },
+				'50%': { borderColor: 'black' },
+			},
+			slideFadeIn: {
+				'0%': { opacity: '0', transform: 'translateY(20px)' },
+				'100%': { opacity: '1', transform: 'translateY(0)' },
+			},
+			slideUpOut: {
+				'0%': { transform: 'translateY(0)' },
+				'100%': { transform: 'translateY(-100vh)' },
+			},
   		},
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',
-  			'accordion-up': 'accordion-up 0.2s ease-out'
-  		}
+  			'accordion-up': 'accordion-up 0.2s ease-out',
+			slideFadeIn: 'slideFadeIn 1s ease-out forwards',
+			typewriter: 'typewriter 2s steps(19, end) 0s forwards, blinkCaret 0.75s step-end infinite',
+			slideUpOut: 'slideUpOut 300ms ease-in-out forwards'
+		},
+		fontFamily: {
+			mono: ['"Courier New"', 'monospace'],
+		},
   	}
   },
   plugins: [require("tailwindcss-animate")],
