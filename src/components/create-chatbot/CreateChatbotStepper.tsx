@@ -58,8 +58,9 @@ export const CreateChatbotStepper = () => {
             );
         },
         onSuccess: async () => {
+            const user_id = localStorage.getItem("user_id")
+            await queryClient.invalidateQueries({ queryKey: ['chatbots', user_id] });
             fireConfetti();
-            await queryClient.invalidateQueries({ queryKey: ['chatbots'] });
             setTimeout(() => {
                 navigate({to:"/chats"});
             }, 3000)

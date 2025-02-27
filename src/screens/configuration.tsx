@@ -7,16 +7,14 @@ import {useEffect, useState} from "react";
 import {Chatbot} from "@/types.ts";
 import {useGetChatbot} from "@/hooks/use-get-chatbot.tsx";
 import {useQueryClient} from "@tanstack/react-query";
-import Cookies from "universal-cookie";
 import {useTranslation} from "react-i18next";
 import {Maintainers} from "@/components/configuration/maintainers.tsx";
 
-const cookies = new Cookies();
 
 export const ConfigurationScreen = () => {
     const {t} = useTranslation();
     const {data: chatbot, isLoading} = useGetChatbot();
-    const user_id = cookies.get("user_id");
+    const user_id = localStorage.getItem("user_id");
     const queryClient = useQueryClient();
     const {mutateAsync: updateChatbot, isPending} = useUpdateChatbot({
         onSuccess: () => queryClient.invalidateQueries({queryKey: ["chatbots", user_id]})

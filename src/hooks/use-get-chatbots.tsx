@@ -5,10 +5,10 @@ import {API_URL} from "@/constants.ts";
 import {request} from "@/request.ts";
 
 export const useGetChatbots = () => {
-    //TODO add userId to the key
+    const user_id = localStorage.getItem("user_id")
     return useQuery<Chatbot[], Error, Chatbot[]>({
         queryFn: getChatbots,
-        queryKey: ['chatbots']
+        queryKey: ['chatbots', user_id]
     })
 }
 

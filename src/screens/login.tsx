@@ -10,6 +10,7 @@ import {useNavigate} from "@tanstack/react-router";
 import {useIsAuthenticated} from "@/hooks/use-is-authenticated.tsx";
 import {useTranslation} from "react-i18next";
 import {toast} from "react-toastify";
+import { jwtDecode } from "jwt-decode";
 
 const formSchema = z.object({
     username: z.string(),
@@ -23,6 +24,8 @@ export const LoginScreen = () => {
 
     const {mutateAsync: login} = useLogin({
         onSuccess: async (d) => {
+            const decoded = jwtDecode(d.access) as { user_id: string };
+            localStorage.setItem("user_id", decoded.user_id);
             localStorage.setItem("access_token", d.access);
             localStorage.setItem("refresh_token", d.refresh);
             await navigate({
