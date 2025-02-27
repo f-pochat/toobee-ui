@@ -30,7 +30,7 @@ export const ConfigurationScreen = () => {
     }, [chatbot, isLoading])
 
     return (
-        <div className="flex flex-col p-10 gap-3">
+        <div className="flex flex-col p-10 gap-4">
             <div className="flex flex-row justify-between items-center">
                 <h1>{t("sections.configuration")}</h1>
                 <Button
@@ -48,33 +48,35 @@ export const ConfigurationScreen = () => {
                 />
             </div>
             <Separator/>
-            <h2>{t("configuration.credentials")}</h2>
-            <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="whatsapp-phone-id" className="text-right">
-                    {t("configuration.phone-number-id")}
-                </Label>
-                <Input id="whatsapp-phone-id"
-                       className="col-span-3" value={credentials.phone_number_id}
-                       onChange={(e) => setCredentials({...credentials, phone_number_id: e.target.value})}/>
+            {/*<h2>{t("configuration.credentials")}</h2>*/}
+            {/*<div className="grid grid-cols-4 items-center gap-4">*/}
+            {/*    <Label htmlFor="whatsapp-phone-id" className="text-right">*/}
+            {/*        {t("configuration.phone-number-id")}*/}
+            {/*    </Label>*/}
+            {/*    <Input id="whatsapp-phone-id"*/}
+            {/*           className="col-span-3" value={credentials.phone_number_id}*/}
+            {/*           onChange={(e) => setCredentials({...credentials, phone_number_id: e.target.value})}/>*/}
+            {/*</div>*/}
+            {/*<div className="grid grid-cols-4 items-center gap-4">*/}
+            {/*    <Label htmlFor="whatsapp-client-id" className="text-right">*/}
+            {/*        {t("configuration.whatsapp-client-id")}*/}
+            {/*    </Label>*/}
+            {/*    <Input id="whatsapp-client-id" className="col-span-3" value={credentials.whatsapp_client_id}*/}
+            {/*           onChange={(e) => setCredentials({...credentials, whatsapp_client_id: e.target.value})}/>*/}
+            {/*</div>*/}
+            {/*<div className="grid grid-cols-4 items-center gap-4">*/}
+            {/*    <Label htmlFor="whatsapp-client-secret" className="text-right">*/}
+            {/*        {t("configuration.whatsapp-client-secret")}*/}
+            {/*    </Label>*/}
+            {/*    <Input id="whatsapp-client-secret" type="password" className="col-span-3"*/}
+            {/*           value={credentials.whatsapp_client_secret}*/}
+            {/*           onChange={(e) => setCredentials({...credentials, whatsapp_client_secret: e.target.value})}/>*/}
+            {/*</div>*/}
+            {/*<Separator/>*/}
+            <div className="flex flex-col gap-2">
+                <h2>{t("configuration.maintainers-title")}</h2>
+                <Maintainers/>
             </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="whatsapp-client-id" className="text-right">
-                    {t("configuration.whatsapp-client-id")}
-                </Label>
-                <Input id="whatsapp-client-id" className="col-span-3" value={credentials.whatsapp_client_id}
-                       onChange={(e) => setCredentials({...credentials, whatsapp_client_id: e.target.value})}/>
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="whatsapp-client-secret" className="text-right">
-                    {t("configuration.whatsapp-client-secret")}
-                </Label>
-                <Input id="whatsapp-client-secret" type="password" className="col-span-3"
-                       value={credentials.whatsapp_client_secret}
-                       onChange={(e) => setCredentials({...credentials, whatsapp_client_secret: e.target.value})}/>
-            </div>
-            <Separator/>
-            <h2>{t("configuration.maintainers-title")}</h2>
-            <Maintainers />
         </div>
     )
 }

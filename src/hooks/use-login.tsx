@@ -1,10 +1,7 @@
-import {useMutation} from "@tanstack/react-query";
+import {MutationOptions, useMutation} from "@tanstack/react-query";
 import {API_URL} from "@/constants.ts";
 import {request} from "@/request.ts";
-
-type Options = {
-    onSuccess?: (d: LoginResponse) => void;
-}
+import {HTTPError} from "superagent";
 
 type LoginParams = {
     username: string;
@@ -16,8 +13,8 @@ type LoginResponse = {
     refresh: string;
 }
 
-export const useLogin = (options?: Options) => {
-    return useMutation<LoginResponse, Error, LoginParams>({
+export const useLogin = (options?: MutationOptions<LoginResponse, HTTPError, LoginParams>) => {
+    return useMutation<LoginResponse, HTTPError, LoginParams>({
         mutationFn: login,
         ...options
     })

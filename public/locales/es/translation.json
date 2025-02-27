@@ -21,8 +21,8 @@
   },
   "tiendanube": {
     "code": "Ingrese el codigo de Tiendanube...",
-    "connected": "CONECTADO",
-    "disconnected": "DESCONECTADO",
+    "connected": "Conectado",
+    "disconnected": "Desconectado",
     "save": "Conectar",
     "connect-error": "Error al conectar con Tiendanube",
     "disconnect-error": "Error al desconectar Tiendanube",
@@ -44,17 +44,22 @@
     "username_placeholder": "Ingresar nombre de usuario",
     "invite_button": "Invitar",
     "username_not_found": "Nombre de usuario no encontrado",
-    "failed_to_delete": "Error al eliminar al colaborador"
+    "failed_to_delete": "Error al eliminar al colaborador",
+    "owner": "Titular",
+    "maintainer": "Colaborador",
+    "delete-warning": "Esta acción no se puede deshacer. ¿Estás seguro de que deseas eliminar permanentemente este colaborador?"
   },
   "auth": {
     "login": "Iniciar Sesión",
     "message": "Ingresa tu correo electrónico y contraseña para acceder a tu cuenta.",
     "username": "Usuario",
-    "password": "Contraseña"
+    "password": "Contraseña",
+    "incorrect-credentials": "Credenciales Incorrectas"
   },
   "common": {
     "save-changes": "Guardar Cambios",
     "are-you-sure": "¿Estás seguro?",
-    "confirm": "Confirmar"
+    "confirm": "Confirmar",
+    "error-occurred": "Hubo un error inesperado"
   }
 }

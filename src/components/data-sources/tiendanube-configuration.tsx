@@ -1,4 +1,3 @@
-import {Label} from "@/components/ui/label.tsx";
 import {Input} from "@/components/ui/input.tsx";
 import {Button} from "@/components/ui/button.tsx";
 import {useTranslation} from "react-i18next";
@@ -8,6 +7,7 @@ import {useConfigureTiendanube} from "@/hooks/use-configure-tiendanube.tsx";
 import {useQueryClient} from "@tanstack/react-query";
 import {toast} from "react-toastify";
 import {useDisconnectTiendanube} from "@/hooks/use-disconnect-tiendanube.tsx";
+import {Badge} from "@/components/ui/badge.tsx";
 
 export const TiendanubeConfiguration = () => {
     const { t } = useTranslation();
@@ -50,13 +50,14 @@ export const TiendanubeConfiguration = () => {
 
     return (
         <div className="flex flex-col gap-2">
-            <div className="flex flex-row justify-between items-center">
-                <h2 className="p-2">
+            <div className="flex flex-row items-center gap-8">
+                <h2 className="flex flex-row items-center gap-2 p-2">
+                    <img src="/tiendanube.png" alt="tiendanube" className="w-auto h-6"/>
                     Tiendanube
                 </h2>
-                <Label className={tiendanubeConfig?.status === "CONNECTED" ? "text-green-500" : "text-red-500"}>
+                <Badge className={`${tiendanubeConfig?.status === "CONNECTED" ? "bg-green-500 hover:bg-green-500" : "bg-red-500 hover:bg-red-500"}`}>
                     {tiendanubeConfig?.status === "CONNECTED" ? t("tiendanube.connected") : t("tiendanube.disconnected")}
-                </Label>
+                </Badge>
             </div>
 
             {tiendanubeConfig?.status === "CONNECTED" ? (

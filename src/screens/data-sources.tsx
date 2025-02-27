@@ -163,7 +163,6 @@ export const DataSourceScreen = () => {
                 </div>
                 <Separator/>
                 <TiendanubeConfiguration />
-                <Separator/>
             </div>
             <DialogContent>
                 <DialogHeader>

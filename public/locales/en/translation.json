@@ -27,17 +27,28 @@
     "credentials": "Credentials",
     "phone-number-id": "Phone Number Id",
     "whatsapp-client-id": "Whatsapp Client Id",
-    "whatsapp-client-secret": "Whatsapp Client Secret"
+    "whatsapp-client-secret": "Whatsapp Client Secret",
   },
   "auth": {
     "login": "Log In",
     "message": "Enter your email and password to login to your account.",
     "username": "Username",
-    "password": "Password"
+    "password": "Password",
+    "incorrect-credentials": "Incorrect Credentials"
+  },
+  "maintainers": {
+    "search_placeholder": "Search by username...",
+    "username_placeholder": "Enter username",
+    "invite_button": "Invite",
+    "username_not_found": "Username not found",
+    "failed_to_delete": "Failed to delete username",
+    "owner": "Owner",
+    "maintainer": "Maintainer"
   },
   "common": {
     "save-changes": "Save Changes",
     "are-you-sure": "Are you sure?",
-    "confim": "Confirm"
+    "confim": "Confirm",
+    "error-occurred": "An unexpected error has occurred"
   }
 }

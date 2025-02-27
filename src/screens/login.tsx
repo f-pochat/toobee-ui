@@ -9,13 +9,11 @@ import {useLogin} from "@/hooks/use-login.tsx";
 import {useNavigate} from "@tanstack/react-router";
 import {useIsAuthenticated} from "@/hooks/use-is-authenticated.tsx";
 import {useTranslation} from "react-i18next";
+import {toast} from "react-toastify";
 
 const formSchema = z.object({
     username: z.string(),
-    password: z
-        .string()
-        .min(6, { message: 'Password must be at least 6 characters long' })
-        .regex(/[a-zA-Z0-9]/, { message: 'Password must be alphanumeric' }),
+    password: z.string()
 })
 
 export const LoginScreen = () => {
@@ -30,6 +28,9 @@ export const LoginScreen = () => {
             await navigate({
                 to: '/chats'
             })
+        },
+        onError: (e) => {
+            toast.error(e.status == 401 ? t("auth.incorrect-credentials"): t("common.error-occurred"));
         }
     });
 

@@ -43,11 +43,13 @@ export type DataSource = {
     type: string;
 }
 
+export type Role = "owner" | "maintainer";
+
 export type Maintainer = {
     id: string,
     username: string;
     email: string;
-    role: string;
+    role: Role;
 }
 
 export type TiendanubeConfiguration = {
