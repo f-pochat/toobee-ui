@@ -21,5 +21,6 @@ export const ChatbotGuard = ({ children }: { children: React.ReactNode }) => {
             </div>
         )
     }
-            return <>{children}</>;
-            };
+
+    return <>{children}</>;
+};
