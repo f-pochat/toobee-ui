@@ -10,21 +10,16 @@ import {useEffect, useState} from "react";
 import {useGetChatbots} from "@/hooks/use-get-chatbots.tsx";
 import {Chatbot} from "@/types.ts";
 import {Skeleton} from "@/components/ui/skeleton.tsx";
-import {useNavigate} from "@tanstack/react-router";
 
 export const ChatbotSwitcher = () => {
     const [activeChatbot, setActiveChatbot] = useState<Chatbot | null>(null);
     const active_chatbot_id = localStorage.getItem("active_chatbot_id");
     const {data: chatbots, isLoading} = useGetChatbots();
-    const navigate = useNavigate();
 
     useEffect(() => {
-        console.log('chatbots', chatbots )
         if (chatbots && chatbots.length > 0) {
             setActiveChatbot(chatbots.find(c => c.id === active_chatbot_id) ?? chatbots[0])
             if (!active_chatbot_id) localStorage.setItem("active_chatbot_id", chatbots[0]?.id);
-        } else if(!isLoading){
-        navigate({ to: "/init-chatbot" });
         }
     }, [active_chatbot_id, chatbots]);
 
