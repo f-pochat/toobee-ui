@@ -19,7 +19,6 @@ export const ChatbotSwitcher = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        console.log('chatbots', chatbots )
         if (chatbots && chatbots.length > 0) {
             setActiveChatbot(chatbots.find(c => c.id === active_chatbot_id) ?? chatbots[0])
             if (!active_chatbot_id) localStorage.setItem("active_chatbot_id", chatbots[0]?.id);

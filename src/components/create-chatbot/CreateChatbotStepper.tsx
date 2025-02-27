@@ -12,6 +12,7 @@ import {toast, ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ReactCanvasConfetti from "react-canvas-confetti";
 import {useNavigate} from "@tanstack/react-router";
+import {useQueryClient} from "@tanstack/react-query";
 
 export const CreateChatbotStepper = () => {
     const [chatbotInfo, setChatbotInfo] = useState<CreateChatbotParams>({
@@ -22,7 +23,7 @@ export const CreateChatbotStepper = () => {
         whatsapp_client_id: "",
         whatsapp_client_secret: ""
     });
-
+    const queryClient = useQueryClient();
     const confettiRef = useRef<any>(null);
     const navigate = useNavigate()
 
@@ -56,7 +57,9 @@ export const CreateChatbotStepper = () => {
                 `Error creando Chatbot: ${error.response?.body?.message || error.response?.body?.detail || ""}`
             );
         },
-        onSuccess: () => {
+        onSuccess: async () => {
+            const user_id = localStorage.getItem("user_id")
+            await queryClient.invalidateQueries({ queryKey: ['chatbots', user_id] });
             fireConfetti();
             setTimeout(() => {
                 navigate({to:"/chats"});
