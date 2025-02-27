@@ -6,9 +6,9 @@ import {useNavigate} from "@tanstack/react-router";
 export const ChatsScreen = () => {
     const navigate = useNavigate();
     useEffect(() => {
-        const handleKeyDown = (event: globalThis.KeyboardEvent) => {
+        const handleKeyDown = async (event: globalThis.KeyboardEvent) => {
             if (event.key === "Escape") {
-                navigate({
+                await navigate({
                     to: "/chats"
                 })
             }
@@ -19,7 +19,7 @@ export const ChatsScreen = () => {
         return () => {
             document.removeEventListener("keydown", handleKeyDown);
         };
-    }, []);
+    }, [navigate]);
 
     return (
         <ChatSidebar>
