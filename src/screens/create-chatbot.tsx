@@ -1,5 +1,5 @@
 import {Button} from "@/components/ui/button.tsx";
-import {CreateChatbotStepper} from "@/components/create-chatbot/CreateChatbotStepper.tsx";
+import {CreateChatbotStepper} from "@/components/create-chatbot/create-chatbot-stepper";
 import {useState} from "react";
 import {t} from "i18next";
 

@@ -53,7 +53,7 @@ export const CreateChatbotStepper = () => {
     const { mutateAsync: createChatbot, isPending, isSuccess } = useCreateChatbot({
         onError: (error) => {
             toast.error(
-                `Error creando Chatbot: ${error.response?.body?.message || error.response?.body?.detail || ""}`
+                `Error creando Chatbot: ${error.message || ""}`
             );
         },
         onSuccess: () => {

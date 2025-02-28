@@ -1,6 +1,7 @@
 import {MutationOptions, useMutation} from "@tanstack/react-query";
 import {API_URL} from "@/constants.ts";
 import {request} from "@/request.ts";
+import { HTTPError } from "superagent";
 
  export interface CreateChatbotParams {
     name: string;
@@ -11,9 +12,9 @@ import {request} from "@/request.ts";
     permanent_access_token: string;
 }
 
-export const useCreateChatbot = (options?: MutationOptions<CreateChatbotParams, Error, CreateChatbotParams>) => {
+export const useCreateChatbot = (options?: MutationOptions<CreateChatbotParams, HTTPError, CreateChatbotParams>) => {
 
-    return useMutation<CreateChatbotParams, Error, CreateChatbotParams>({
+    return useMutation<CreateChatbotParams, HTTPError, CreateChatbotParams>({
         mutationFn: createChatbot,
         ...options
     });
