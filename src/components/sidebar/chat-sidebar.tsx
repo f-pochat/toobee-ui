@@ -35,7 +35,7 @@ export const ChatSidebar = ({children}: { children: ReactNode }) => {
     const {data: chats, isLoading} = useGetChats(chatbot_id ?? undefined);
     return (
         <div className="flex flex-row h-screen">
-            <div className="w-[24rem] pt-2 px-2">
+            <div className="w-[30rem] pt-2 px-2">
                 <div className="flex flex-col gap-2">
                     <Input placeholder={t("chats.search")}/>
                     {
