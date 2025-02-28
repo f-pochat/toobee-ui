@@ -28,6 +28,7 @@
     "phone-number-id": "Phone Number Id",
     "whatsapp-client-id": "Whatsapp Client Id",
     "whatsapp-client-secret": "Whatsapp Client Secret",
+    "permanent-access-token": "Permanent Access Token"
   },
   "auth": {
     "login": "Log In",
@@ -48,7 +49,25 @@
   "common": {
     "save-changes": "Save Changes",
     "are-you-sure": "Are you sure?",
-    "confim": "Confirm",
+    "confirm": "Confirm",
     "error-occurred": "An unexpected error has occurred"
+
+  },
+  "create-chatbot": {
+    "name-and-identity": "Name and Identity",
+    "name-and-identity-description": "In this step, assign a unique name to your chatbot and briefly define its identity and tasks. A good system message will help guide its behavior.",
+    "credentials": "Credentials",
+    "credentials-description": "In this step, you will need to complete the necessary credentials to integrate WhatsApp Business, including the associated phone number. It is essential that you enter this data correctly for the connection to work optimally.",
+    "system-message-placeholder": "Example: You are a digital assistant that helps users solve problems and provide useful information. Be concise, clear, and friendly.",
+    "min-characters": "minimum 20 characters",
+    "next": "Next",
+    "previous": "Previous",
+    "create-chatbot": "Create Chatbot",
+    "creating-chatbot": "Creating Chatbot...",
+    "chatbot-started": "Chatbot Started!"
+  },
+  "welcome": {
+    "title": "Welcome to Toobee!",
+    "create-chatbot-button": "Create my Chatbot"
   }
 }
