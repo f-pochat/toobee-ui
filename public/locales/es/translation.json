@@ -70,7 +70,7 @@
   "common": {
     "save-changes": "Guardar Cambios",
     "are-you-sure": "¿Estás seguro?",
-    "error-occurred": "Hubo un error inesperado"
+    "error-occurred": "Hubo un error inesperado",
     "confirm": "Confirmar"
   },
   "create-chatbot": {
