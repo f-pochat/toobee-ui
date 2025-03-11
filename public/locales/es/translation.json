@@ -10,7 +10,8 @@
     "search": "Escribe para buscar...",
     "ai": "Respuestas de IA",
     "type-message": "Escribe un mensaje",
-    "send": "Enviar"
+    "send": "Enviar",
+    "all-pill": "Todos"
   },
   "data-sources": {
     "pdf": "Fuentes de Documentos",

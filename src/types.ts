@@ -15,6 +15,7 @@ export type Chat = {
     name: string;
     last_message_date: string;
     last_message: string;
+    channel:string
 }
 
 export type UserInfo = {
