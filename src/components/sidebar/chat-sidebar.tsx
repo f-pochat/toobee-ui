@@ -43,7 +43,7 @@ export const ChatSidebar = ({ children }: { children: ReactNode }) => {
 
   const channels = useMemo(() => {
     const uniqueChannels = new Set(chats?.map((chat) => chat.channel));
-    return [allPill, "facebook", ...Array.from(uniqueChannels)];
+    return [allPill, ...Array.from(uniqueChannels)];
   }, [chats]);
 
   const handleChannelClick = (channel: string) => {
@@ -88,8 +88,8 @@ export const ChatSidebar = ({ children }: { children: ReactNode }) => {
           </Badge>
         ))}
       </div>
-      <div className="flex flex-row overflow-y-auto">
-        <div className="w-[24rem] pt-2 px-2">
+      <div className="flex flex-row h-[calc(100vh-3rem)]">
+        <div className="w-[24rem] pt-2 px-2 overflow-y-auto">
           <div className="flex flex-col gap-2">
             <Input
               placeholder={t("chats.search")}
