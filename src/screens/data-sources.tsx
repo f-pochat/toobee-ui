@@ -20,8 +20,10 @@ import {useSubmitURL} from "@/hooks/use-submit-url.tsx";
 import {useEffect, useState} from "react";
 import {TiendanubeConfiguration} from "@/components/data-sources/tiendanube-configuration.tsx";
 import {Separator} from "@/components/ui/separator.tsx";
+import {useDeleteDataSource} from "@/hooks/use-delete-data-source.tsx";
 
 export const DataSourceScreen = () => {
+    const [selectedDataSource, setSelectedDataSource] = useState<DataSource | null>(null);
     const {t} = useTranslation();
     const queryClient = useQueryClient();
     const chatbot_id = localStorage.getItem("chatbot_id")
@@ -81,6 +83,10 @@ export const DataSourceScreen = () => {
         },
     });
 
+    const {mutate: deleteDataSource, isPending: isDeletingDataSource} = useDeleteDataSource({
+        onSuccess: () => setSelectedDataSource(null)
+    });
+
     const [urls, setUrls] = useState<string[]>([]);
 
     const {data: dataSources} = useGetDataSources();
@@ -89,7 +95,7 @@ export const DataSourceScreen = () => {
         setUrls(dataSources?.filter((d) => d.type === "URL").map(d => d.name) ?? []);
     }, [dataSources]);
     return (
-        <Dialog>
+        <Dialog open={!!selectedDataSource} onOpenChange={(open) => !open && setSelectedDataSource(null)}>
             <div className="p-10 flex flex-col gap-4">
                 <div>
                     <h2 className="p-2">
@@ -117,8 +123,12 @@ export const DataSourceScreen = () => {
                                 dataSources?.filter((d) => d.type === "PDF").map((d) => (
                                     <Badge key={d.id} variant="secondary" className="flex justify-between gap-1 py-2">
                                         {d.name}
-                                        <DialogTrigger>
-                                            <CircleX size={16} className="cursor-pointer"/>
+                                        <DialogTrigger asChild>
+                                            <CircleX
+                                              size={16}
+                                              className="cursor-pointer"
+                                              onClick={() => setSelectedDataSource(d)}
+                                            />
                                         </DialogTrigger>
                                     </Badge>
                                 ))
@@ -169,11 +179,10 @@ export const DataSourceScreen = () => {
                     <DialogTitle>{t("common.are-you-sure")}</DialogTitle>
                     <DialogDescription>
                         {t("data-sources.delete-warning")}
-
                     </DialogDescription>
                 </DialogHeader>
                 <DialogFooter>
-                    <Button>{t("common.confirm")}</Button>
+                    <Button loading={isDeletingDataSource}  onClick={() => selectedDataSource && deleteDataSource({dataSourceId: selectedDataSource?.id})}>{t("common.confirm")}</Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>
