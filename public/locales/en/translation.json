@@ -10,7 +10,8 @@
     "search": "Type to search...",
     "ai": "AI Responses",
     "type-message": "Type a message",
-    "send": "Send"
+    "send": "Send",
+    "all-pill": "All"
   },
   "data-sources": {
     "pdf": "Document Sources",
@@ -20,7 +21,16 @@
     "add-url": "Add Website"
   },
   "prompting": {
-    "system-message": "System Message"
+    "name": "Assistant name",
+    "name-placeholder": "The name that the assistant will be introduced with...",
+    "temperature": "Temperature",
+    "temperature-tooltip": "Controls the assistant's creativity. A higher value means more creativity, and a lower value means less creativity.",
+    "general-instructions": "General instructions",
+    "instructions-placeholder": "Write the general instructions for the assistant here. Example:\n- Provide clear and direct answers.\n- If the user asks an ambiguous question, request more details before responding.",
+    "tone": "Tone or language",
+    "tone-placeholder": "Write here the tone or language you want the assistant to use. Example: formal, casual, etc.",
+    "saved": "The assistant's settings have been updated",
+    "error": "Error updating the assistant's settings"
   },
   "configuration": {
     "name": "Chatbot Name",
@@ -51,7 +61,6 @@
     "are-you-sure": "Are you sure?",
     "confirm": "Confirm",
     "error-occurred": "An unexpected error has occurred"
-
   },
   "create-chatbot": {
     "name-and-identity": "Name and Identity",

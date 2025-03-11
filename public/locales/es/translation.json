@@ -10,7 +10,8 @@
     "search": "Escribe para buscar...",
     "ai": "Respuestas de IA",
     "type-message": "Escribe un mensaje",
-    "send": "Enviar"
+    "send": "Enviar",
+    "all-pill": "Todos"
   },
   "data-sources": {
     "pdf": "Fuentes de Documentos",
@@ -29,7 +30,16 @@
     "disconnect": "Desconectar"
   },
   "prompting": {
-    "system-message": "Mensaje del Sistema"
+    "name":"Nombre del asistente",
+    "name-placeholder":"El nombre con el que se presentará el asistente...",
+    "temperature":"Temperatura",
+    "temperature-tooltip":"Controla la creatividad del asistente. Un valor mayor significa mayor creatividad y un valor menor significa menos creatividad.",
+    "general-instructions": "Instrucciones generales",
+    "instructions-placeholder": "Escribe aquí las instrucciones generales para el asistente. Ejemplo:\n- Proporciona respuestas claras y directas.\n- Si el usuario hace una pregunta ambigua, solicita más detalles antes de responder.",
+    "tone": "Tono o lenguaje",
+    "tone-placeholder": "Escribe aqui el tono o lenguaje que deseas utilizar para el asistente. Ejemplo: formal, casual, etc",
+    "saved": "Se actualizaron las configuraciones del asistente",
+    "error": "Error al actualizar las configuraciones del asistente"
   },
   "configuration": {
     "name": "Nombre del Chatbot",
@@ -60,7 +70,7 @@
   "common": {
     "save-changes": "Guardar Cambios",
     "are-you-sure": "¿Estás seguro?",
-    "error-occurred": "Hubo un error inesperado"
+    "error-occurred": "Hubo un error inesperado",
     "confirm": "Confirmar"
   },
   "create-chatbot": {
